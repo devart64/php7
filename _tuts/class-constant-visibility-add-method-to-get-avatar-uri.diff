@@ -1,0 +1,44 @@
+diff --git a/src/AppBundle/Controller/GenusController.php b/src/AppBundle/Controller/GenusController.php
+index a721881..7725aed 100644
+--- a/src/AppBundle/Controller/GenusController.php
++++ b/src/AppBundle/Controller/GenusController.php
+@@ -124,7 +124,7 @@ class GenusController extends Controller
+             $notes[] = [
+                 'id' => $note->getId(),
+                 'username' => $note->getUsername(),
+-                'avatarUri' => GenusNote::AVATAR_FILE_PREFIX.'/'.$note->getUserAvatarFilename(),
++                'avatarUri' => $note->getUserAvatarUri(),
+                 'note' => $note->getNote(),
+                 'date' => $note->getCreatedAt()->format('M d, Y')
+             ];
+diff --git a/src/AppBundle/Entity/GenusNote.php b/src/AppBundle/Entity/GenusNote.php
+index 6dd30c2..576574d 100644
+--- a/src/AppBundle/Entity/GenusNote.php
++++ b/src/AppBundle/Entity/GenusNote.php
+@@ -12,6 +12,8 @@ class GenusNote
+ {
+     private const AVATAR_FILE_PREFIX = '/images';
+ 
++    private const BLANK_AVATAR_FILENAME = 'blank.jpg';
++
+     /**
+      * @ORM\Id
+      * @ORM\GeneratedValue(strategy="AUTO")
+@@ -60,6 +62,17 @@ class GenusNote
+         return $this->userAvatarFilename;
+     }
+ 
++    public function getUserAvatarUri(): string
++    {
++        $filename = $this->getUserAvatarFilename();
++
++        if (!$filename) {
++            $filename = self::BLANK_AVATAR_FILENAME;
++        }
++
++        return self::AVATAR_FILE_PREFIX.'/'.$filename;
++    }
++
+     public function setUserAvatarFilename($userAvatarFilename)
+     {
+         $this->userAvatarFilename = $userAvatarFilename;

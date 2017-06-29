@@ -1,0 +1,10 @@
+diff --git a/play-exceptions.php b/play-exceptions.php
+new file mode 100644
+index 0000000..f87e60f
+--- /dev/null
++++ b/play-exceptions.php
+@@ -0,0 +1,4 @@
++<?php
++undefinedFunction();
++
++echo "\n\nContinue processing file...";

@@ -1,0 +1,15 @@
+diff --git a/src/AppBundle/Controller/GenusController.php b/src/AppBundle/Controller/GenusController.php
+index 9215f9c..d9c1f95 100644
+--- a/src/AppBundle/Controller/GenusController.php
++++ b/src/AppBundle/Controller/GenusController.php
+@@ -105,7 +105,9 @@ class GenusController extends Controller
+         $recentNotes = $em->getRepository('AppBundle:GenusNote')
+             ->findAllRecentNotesForGenus($genus);
+ 
+-        $food = ['shrimp', 'clams', 'lobsters', 'shark'];
++        $foodArray = ['shrimp', 'clams', 'lobsters', 'shark'];
++        $foodObject = new \ArrayObject($foodArray);
++        $food = $foodObject->getIterator();
+ 
+         return $this->render('genus/show.html.twig', array(
+             'genus' => $genus,

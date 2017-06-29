@@ -1,0 +1,28 @@
+diff --git a/src/AppBundle/Controller/GenusController.php b/src/AppBundle/Controller/GenusController.php
+index 4351b21..3535592 100644
+--- a/src/AppBundle/Controller/GenusController.php
++++ b/src/AppBundle/Controller/GenusController.php
+@@ -23,6 +23,10 @@ class GenusController extends Controller
+         $genus = new Genus();
+         $genus->setName('Octopus');
+ 
++        $genus->setFunFact('This is fun');
++        var_dump($genus->getFunFact());
++
++        $genus->setFunFact(null);
+         var_dump($genus->getFunFact());
+         die;
+     }
+diff --git a/src/AppBundle/Entity/Genus.php b/src/AppBundle/Entity/Genus.php
+index e94a833..2ca2c21 100644
+--- a/src/AppBundle/Entity/Genus.php
++++ b/src/AppBundle/Entity/Genus.php
+@@ -128,7 +128,7 @@ class Genus
+         $this->speciesCount = $speciesCount;
+     }
+ 
+-    public function getFunFact(): string
++    public function getFunFact(): ?string
+     {
+         return $this->funFact;
+     }

@@ -1,0 +1,23 @@
+diff --git a/src/AppBundle/Entity/Genus.php b/src/AppBundle/Entity/Genus.php
+index 1aadb7a..b54badc 100644
+--- a/src/AppBundle/Entity/Genus.php
++++ b/src/AppBundle/Entity/Genus.php
+@@ -223,10 +223,16 @@ class Genus
+ 
+     public function feed(iterable $food): string
+     {
+-        if (count($food) === 0) {
++        $foodItems = [];
++
++        foreach ($food as $foodItem) {
++            $foodItems[] = $foodItem;
++        }
++
++        if (count($foodItems) === 0) {
+             return sprintf('%s is looking at you in a funny way', $this->getName());
+         }
+ 
+-        return sprintf('%s recently ate: %s', $this->getName(), implode(', ', $food));
++        return sprintf('%s recently ate: %s', $this->getName(), implode(', ', $foodItems));
+     }
+ }
